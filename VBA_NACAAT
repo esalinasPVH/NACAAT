@@ -8,10 +8,52 @@ Sub Assign_WorksheetData_Name()
     Set rng = Range("A2", Range("AW2").End(xlDown))
     
     ActiveSheet.Range("A2", Range("AW2").End(xlDown)).Select
-    ActiveWorkbook.Names.Add Name:="Table_NA_Comm_Wksht", RefersTo:=Selection
+    ActiveWorkbook.Names.Add name:="Table_NA_Comm_Wksht", RefersTo:=Selection
 
     
 End Sub
+
+Sub Export()
+
+    Dim dt As String
+    dt = Format(Now, "yyyymmdd-HHmmss")
+    
+    Sheets("NA Commercialization Worksheet").Activate
+    
+    Assign_WorksheetData_Name
+    
+    ActiveWorkbook.Connections("Query - Query_NA_Export").Refresh
+    
+    Dim ver As String
+    ver = Range("CurrentVersion").Cells(1, 1)
+    
+    Dim cv As String
+    cv = Range("CollectionValue").Cells(1, 1)
+    
+    Dim FilePath, FileOnly, PathOnly As String
+    FilePath = ThisWorkbook.FullName
+    FileOnly = ThisWorkbook.name
+    PathOnly = Left(FilePath, Len(FilePath) - Len(FileOnly))
+    
+    Dim nm As String
+    nm = PathOnly & "NACAAT-" & cv & "-MDMUpload_" & ver & "_" & dt & ".xlsx"
+    
+    Worksheets("Sheet_NA_Export").Visible = xlSheetVisible
+    Sheets("Sheet_NA_Export").Activate
+    ActiveSheet.Copy
+    ActiveWorkbook.SaveAs Filename:=nm, _
+    FileFormat:=xlWorkbookDefault
+    ActiveWindow.Close
+    
+    Sheets("Sheet_NA_Export").Activate
+    Worksheets("Sheet_NA_Export").Visible = xlSheetHidden
+    
+    Sheets("Instructions").Activate
+    
+    MsgBox ("Export complete! Close NACAAT and locate file for MDM upload.")
+    
+End Sub
+
 
 Sub Initialize()
 '
@@ -63,8 +105,6 @@ Sub Load_USWhs()
     Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
     Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
   
-    Assign_WorksheetData_Name
-  
     ActiveSheet.Cells(1, 2).Value = "US Tommy Hilfiger Wholesale"
     ActiveSheet.Cells(1, 3).Value = "USTHWH"
     ActiveSheet.Cells(3, 1).Select
@@ -72,3 +112,4 @@ Sub Load_USWhs()
     MsgBox ("Data load complete!")
     
 End Sub
+

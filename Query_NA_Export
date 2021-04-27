@@ -1,0 +1,9 @@
+let
+    Source = Excel.CurrentWorkbook(),
+    Table_NA_Comm_Wksht = Source{[Name="Table_NA_Comm_Wksht"]}[Content],
+    #"Promoted Headers" = Table.PromoteHeaders(Table_NA_Comm_Wksht, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Export", type any}, {"Commercialized Style Number(*)", type text}, {"Legacy Style Number", type text}, {"Style Number(*)", type text}, {"Description", type text}, {"Short Style Description", type text}, {"Color Code(*)", type text}, {"NRF", type text}, {"Colorway Short Description", type text}, {"Color Group/Hue", type text}, {"Colorway Active", type logical}, {"Pattern#", type text}, {"TP Season Year(*)", type text}, {"Tech Pack Stage", type text}, {"Business Group", type text}, {"Brand", type text}, {"SubBrand", type text}, {"Merchandise Sector", type text}, {"Gender", type text}, {"Product Type", type text}, {"Class", type text}, {"SubClass", type text}, {"SMU Customer", type any}, {"Length", type text}, {"Mfg Units", Int64.Type}, {"Pack Type", type text}, {"Fit", type text}, {"Packaging", type text}, {"Program", type text}, {"DTS Channel", type text}, {"DTS Owner", type text}, {"DTS Selling Countries", type text}, {"Size Category", type text}, {"Size Range", type text}, {"Size Range Offered", type text}, {"Adopted Sizes(*)", type any}, {"Collection(*)", type text}, {"Commercial Season", type text}, {"Theme", type any}, {"Product Segmentation", type any}, {"Forecast Code", type any}, {"Pack Method", type text}, {"Delivery Plant", type text}, {"Wholesale Price", type any}, {"Wholesale Price Currency", type text}, {"MSRP", type any}, {"MSRP Currency", type text}, {"Sample/Bulk Indicator", type text}, {"SYSTEM USE ONLY", type text}}),
+    #"Filtered Rows for Export" = Table.SelectRows(#"Changed Type", each ([Export] <> null)),
+    #"Removed Export Column" = Table.RemoveColumns(#"Filtered Rows for Export",{"Export"})
+in
+    #"Removed Export Column"

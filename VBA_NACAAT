@@ -11,10 +11,21 @@ Sub Initialize()
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetHidden
     
 'Clear query ranges
+    Range("Query_NAFlat_CARtlEcom").ClearContents
+    Range("Query_NAFlat_CARtlEcom_DS").ClearContents
+    Range("Query_NAFlat_CARtlOut").ClearContents
+    Range("Query_NAFlat_CARtlOut_DS").ClearContents
+    Range("Query_NAFlat_CAWhs").ClearContents
+    Range("Query_NAFlat_IM").ClearContents
+    Range("Query_NAFlat_USRtlEcom").ClearContents
+    Range("Query_NAFlat_USRtlEcom_DS").ClearContents
+    Range("Query_NAFlat_USRtlOut").ClearContents
+    Range("Query_NAFlat_USRtlOut_DS").ClearContents
     Range("Query_NAFlat_USWhs").ClearContents
 
 'Reset to Instructions view
     Sheets("Instructions").Activate
+    MsgBox ("Initialization complete!")
     
 End Sub
 
@@ -39,5 +50,7 @@ Sub Load_USWhs()
   
     ActiveSheet.Cells(1, 2).Value = "US Tommy Hilfiger Wholesale"
     ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
     
 End Sub

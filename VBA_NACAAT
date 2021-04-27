@@ -1,0 +1,43 @@
+Sub Initialize()
+'
+' Initialize NACAAT
+'
+
+' NA Commercialization Worksheet
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    ActiveSheet.Cells(1, 2).Value = ""
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetHidden
+    
+'Clear query ranges
+    Range("Query_NAFlat_USWhs").ClearContents
+
+'Reset to Instructions view
+    Sheets("Instructions").Activate
+    
+End Sub
+
+
+Sub Load_USWhs()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_USWhs").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_USWhs").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 9.5
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "US Tommy Hilfiger Wholesale"
+    ActiveSheet.Cells(3, 1).Select
+    
+End Sub

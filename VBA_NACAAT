@@ -407,6 +407,122 @@ Sub Load_USWhs()
     
 End Sub
 
+Sub Load_HKTHRT()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_HKTHRT").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_HKTHRT").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "Hong Kong Tommy Hilfiger Retail"
+    ActiveSheet.Cells(1, 3).Value = "HKTHRT"
+    
+    Create_Size_Validation
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+    
+End Sub
+
+Sub Load_JPTHRT()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_JPTHRT").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_JPTHRT").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "Japan Tommy Hilfiger Retail"
+    ActiveSheet.Cells(1, 3).Value = "JPTHRT"
+    
+    Create_Size_Validation
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+    
+End Sub
+
+Sub Load_JPTHWH()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_JPTHWH").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_JPTHWH").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "Japan Tommy Hilfiger Wholesale"
+    ActiveSheet.Cells(1, 3).Value = "JPTHWH"
+    
+    Create_Size_Validation
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+    
+End Sub
+
+Sub Load_APTHWH()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_APTHWH").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_APTHWH").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "Asia Pacific Tommy Hilfiger Wholesale"
+    ActiveSheet.Cells(1, 3).Value = "APTHWH"
+    
+    Create_Size_Validation
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+    
+End Sub
+
 Sub Create_Size_Validation()
 
     'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba

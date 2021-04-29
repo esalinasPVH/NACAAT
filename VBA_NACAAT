@@ -367,9 +367,66 @@ Sub Load_USWhs()
   
     ActiveSheet.Cells(1, 2).Value = "US Tommy Hilfiger Wholesale"
     ActiveSheet.Cells(1, 3).Value = "USTHWH"
+    
+    Create_Size_Validation
+    
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
     
+End Sub
+
+Sub Create_Size_Validation()
+
+    'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
+
+    ActiveWorkbook.Connections("Query - Query_Size_Map").Refresh
+    
+    Create_SourceSizeKey_Name
+    
+    Dim dstSheet As Worksheet
+    Dim dstRange As Range
+    
+    Sheets("NA Commercialization Worksheet").Activate
+    Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
+    Set dstRange = dstSheet.Range("AI3", Range("AI3").End(xlDown)).Offset(, 1)
+    
+    With dstRange.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="=OFFSET(INDEX(SourceSizeKey,1,),MATCH(AX3,SourceSizeKey,0)-1,1,COUNTIF(SourceSizeKey,AX3),1)"
+        .InCellDropdown = True
+    End With
+
+End Sub
+
+
+Sub Create_SourceSizeKey_Name()
+ 
+    'Source: https://powerspreadsheets.com/vba-create-named-range/
+ 
+    Worksheets("Sheet_Size_Map").Visible = xlSheetVisible
+    Sheets("Sheet_Size_Map").Activate
+ 
+    'declare object variables to hold references to worksheet containing cell range, and cell range itself
+    Dim myWorksheet As Worksheet
+    Dim myNamedRange As Range
+ 
+    'declare variable to hold defined name
+    Dim myRangeName As String
+ 
+    'identify worksheet containing cell range, and cell range itself
+    Set myWorksheet = ThisWorkbook.Worksheets("Sheet_Size_Map")
+    
+    Set myNamedRange = myWorksheet.Range("A2", Range("A2").End(xlDown))
+ 
+    'specify defined name
+    myRangeName = "SourceSizeKey"
+ 
+    'create named range with workbook scope. Defined name and cell range are as specified
+    ThisWorkbook.Names.Add name:=myRangeName, RefersTo:=myNamedRange
+    
+    Worksheets("Sheet_Size_Map").Visible = xlSheetHidden
+ 
 End Sub
 

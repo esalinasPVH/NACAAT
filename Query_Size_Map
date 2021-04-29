@@ -1,0 +1,12 @@
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\esalin\Desktop\NA Commercialization\MDM Size Map 04-28-2021.xlsx"), null, true),
+    #"MDM Size Map_Sheet" = Source{[Item="MDM Size Map",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(#"MDM Size Map_Sheet", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Source", type text}, {"Source Size Range", type text}, {"Source Size Range Offered", type text}, {"Source Size Range Code", Int64.Type}, {"Adopted  Code", Int64.Type}, {"Adopted Sizes", type text}, {"Source Size Type", type text}, {"Source Size", type text}, {"Source Sort Order", Int64.Type}, {"Source Dimension Type", type text}, {"Source Dimension", type text}, {"SAP Size", type text}, {"SAP Dimension", type text}, {"Comment", type any}}),
+    #"Filtered to Centric NA" = Table.SelectRows(#"Changed Type", each ([Source] = "Centric NA")),
+    #"Added Key" = Table.AddColumn(#"Filtered to Centric NA", "Source Size Key", each [Source Size Range]&[Source Size Range Offered]),
+    #"Removed Other Columns" = Table.SelectColumns(#"Added Key",{"Source Size Key", "Adopted Sizes"}),
+    #"Sorted Rows" = Table.Sort(#"Removed Other Columns",{{"Source Size Key", Order.Ascending}}),
+    #"Removed Duplicates" = Table.Distinct(#"Sorted Rows")
+in
+    #"Removed Duplicates"

@@ -210,6 +210,9 @@ Sub Load_CAWhs()
   
     ActiveSheet.Cells(1, 2).Value = "Canada Tommy Hilfiger Wholesale"
     ActiveSheet.Cells(1, 3).Value = "CNTHWH"
+    
+    Create_Size_Validation
+    
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")

@@ -2,6 +2,7 @@ let
     Source = Table.NestedJoin(Query_NAStyle,{"Key"},Query_NAColor,{"Key"},"Query_NAColor",JoinKind.Inner),
     #"Expanded Query_NAColor" = Table.ExpandTableColumn(Source, "Query_NAColor", {"Color Code(*)", "NRF", "Colorway Short Description", "Color Group/Hue", "Colorway Active", "Pattern#", "SYSTEM USE ONLY"}, {"Color Code(*)", "NRF", "Colorway Short Description", "Color Group/Hue", "Colorway Active", "Pattern#", "SYSTEM USE ONLY"}),
     #"Reordered Columns" = Table.ReorderColumns(#"Expanded Query_NAColor",{"Commercialized Style Number(*)", "Legacy Style Number", "Style Number(*)", "Description", "Short Style Description", "Color Code(*)", "NRF", "Colorway Short Description", "Color Group/Hue", "Colorway Active", "Pattern#", "TP Season Year(*)", "Tech Pack Stage", "Business Group", "Brand", "SubBrand", "Merchandise Sector", "Gender", "Product Type", "Class", "SubClass", "SMU Customer", "Length", "Mfg Units", "Pack Type", "Fit", "Packaging", "Program", "DTS Channel", "DTS Owner", "DTS Selling Countries", "Size Category", "Size Range", "Size Range Offered", "Adopted Sizes(*)", "Collection(*)", "Commercial Season", "Theme", "Product Segmentation", "Forecast Code", "Pack Method", "Delivery Plant", "Wholesale Price", "Wholesale Price Currency", "MSRP", "MSRP Currency", "Sample/Bulk Indicator", "Key", "SYSTEM USE ONLY"}),
-    #"Removed Key" = Table.RemoveColumns(#"Reordered Columns",{"Key"})
+    #"Removed Key" = Table.RemoveColumns(#"Reordered Columns",{"Key"}),
+    #"Added SizeKey" = Table.AddColumn(#"Removed Key", "Size Key", each [Size Range]&[Size Range Offered])
 in
-    #"Removed Key"
+    #"Added SizeKey"

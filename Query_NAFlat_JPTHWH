@@ -1,0 +1,16 @@
+let
+    Source = #"Query_NAFlat",
+    #"Filtered TH" = Table.SelectRows(Source, each ([Business Group] = "Tommy Hilfiger")),
+    #"Removed Collection" = Table.RemoveColumns(#"Filtered TH",{"Collection(*)"}),
+    #"Added Default Collection" = Table.AddColumn(#"Removed Collection", "Collection(*)", each "Japan Tommy Hilfiger Wholesale"),
+    #"Removed Dlvy Plnt" = Table.RemoveColumns(#"Added Default Collection",{"Delivery Plant"}),
+    #"Added Default Dlvy Plnt" = Table.AddColumn(#"Removed Dlvy Plnt", "Delivery Plant", each "JONESVILLE DC WHOLESALE"),
+    #"Removed Whs Currency" = Table.RemoveColumns(#"Added Default Dlvy Plnt",{"Wholesale Price Currency"}),
+    #"Added Default Whs Currency" = Table.AddColumn(#"Removed Whs Currency", "Wholesale Price Currency", each "United States Dollar"),
+    #"Removed MSRP Currency" = Table.RemoveColumns(#"Added Default Whs Currency",{"MSRP Currency"}),
+    #"Added MSRP Currency" = Table.AddColumn(#"Removed MSRP Currency", "MSRP Currency", each "United States Dollar"),
+    #"Reordered Final Columns" = Table.ReorderColumns(#"Added MSRP Currency",{"Commercialized Style Number(*)", "Legacy Style Number", "Style Number(*)", "Description", "Short Style Description", "Color Code(*)", "NRF", "Colorway Short Description", "Color Group/Hue", "Colorway Active", "Pattern#", "TP Season Year(*)", "Tech Pack Stage", "Business Group", "Brand", "SubBrand", "Merchandise Sector", "Gender", "Product Type", "Class", "SubClass", "SMU Customer", "Length", "Mfg Units", "Pack Type", "Fit", "Packaging", "Program", "DTS Channel", "DTS Owner", "DTS Selling Countries", "Size Category", "Size Range", "Size Range Offered", "Adopted Sizes(*)", "Collection(*)", "Commercial Season", "Theme", "Product Segmentation", "Forecast Code", "Pack Method", "Delivery Plant", "Wholesale Price", "Wholesale Price Currency", "MSRP", "MSRP Currency", "Sample/Bulk Indicator", "SYSTEM USE ONLY"}),
+    #"Filtered DTS Channel" = Table.SelectRows(#"Reordered Final Columns", each ([DTS Channel] <> null)),
+    #"Reordered Columns" = Table.ReorderColumns(#"Filtered DTS Channel",{"Commercialized Style Number(*)", "Legacy Style Number", "Style Number(*)", "Description", "Short Style Description", "Color Code(*)", "NRF", "Colorway Short Description", "Color Group/Hue", "Colorway Active", "Pattern#", "TP Season Year(*)", "Tech Pack Stage", "Business Group", "Brand", "SubBrand", "Merchandise Sector", "Gender", "Product Type", "Class", "SubClass", "SMU Customer", "Length", "Mfg Units", "Pack Type", "Fit", "Packaging", "Program", "DTS Channel", "DTS Owner", "DTS Selling Countries", "Size Category", "Size Range", "Size Range Offered", "Adopted Sizes(*)", "Collection(*)", "Commercial Season", "Theme", "Product Segmentation", "Forecast Code", "Pack Method", "Delivery Plant", "Wholesale Price", "Wholesale Price Currency", "MSRP", "MSRP Currency", "Sample/Bulk Indicator", "SYSTEM USE ONLY", "Size Key"})
+in
+    #"Reordered Columns"

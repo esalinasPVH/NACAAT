@@ -4,7 +4,7 @@ let
     #"Removed Collection" = Table.RemoveColumns(#"Filtered TH",{"Collection(*)"}),
     #"Added Default Collection" = Table.AddColumn(#"Removed Collection", "Collection(*)", each "US Tommy Hilfiger Retail Outlet"),
     #"Removed Dlvy Plnt" = Table.RemoveColumns(#"Added Default Collection",{"Delivery Plant"}),
-    #"Added Default Dlvy Plnt" = Table.AddColumn(#"Removed Dlvy Plnt", "Delivery Plant", each "JONESVILLE DC RETAIL"),
+    #"Added Default Dlvy Plnt" = Table.AddColumn(#"Removed Dlvy Plnt", "Delivery Plant", each "DR05-JONESVILLE DC RETAIL"),
     #"Removed Whs Currency" = Table.RemoveColumns(#"Added Default Dlvy Plnt",{"Wholesale Price Currency"}),
     #"Added Default Whs Currency" = Table.AddColumn(#"Removed Whs Currency", "Wholesale Price Currency", each "United States Dollar"),
     #"Removed MSRP Currency" = Table.RemoveColumns(#"Added Default Whs Currency",{"MSRP Currency"}),

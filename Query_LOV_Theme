@@ -1,5 +1,6 @@
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\esalin\Desktop\NA Commercialization\Product Data Governance Worksheet.xlsm"), null, true),
+    RelativePath = Excel.CurrentWorkbook(){[Name="RelativePath"]}[Content]{0}[Column1],
+    Source = Excel.Workbook(File.Contents(RelativePath & "Product Data Governance Worksheet.xlsm"), null, true),
     #"Theme (SAP)_Sheet" = Source{[Item="Theme (SAP)",Kind="Sheet"]}[Data],
     #"Removed Top Rows" = Table.Skip(#"Theme (SAP)_Sheet",1),
     #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),

@@ -70,14 +70,18 @@ Sub Initialize()
 'Clear query ranges
     Range("Query_NAFlat_CARtlEcom").ClearContents
     Range("Query_NAFlat_CARtlEcom_DS").ClearContents
+    Range("Query_NAFlat_CARtlEcom_UW").ClearContents
     Range("Query_NAFlat_CARtlOut").ClearContents
     Range("Query_NAFlat_CARtlOut_DS").ClearContents
+    Range("Query_NAFlat_CARtlOut_UW").ClearContents
     Range("Query_NAFlat_CAWhs").ClearContents
     Range("Query_NAFlat_IM").ClearContents
     Range("Query_NAFlat_USRtlEcom").ClearContents
     Range("Query_NAFlat_USRtlEcom_DS").ClearContents
+    Range("Query_NAFlat_USRtlEcom_UW").ClearContents
     Range("Query_NAFlat_USRtlOut").ClearContents
     Range("Query_NAFlat_USRtlOut_DS").ClearContents
+    Range("Query_NAFlat_USRtlOut_UW").ClearContents
     Range("Query_NAFlat_USWhs").ClearContents
     Range("Query_Size_Map").ClearContents
 
@@ -127,6 +131,35 @@ Sub Load_CARtlEcom_DS()
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_CARtlEcom_DS").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "Canada Tommy Hilfiger Retail Ecom"
+    ActiveSheet.Cells(1, 3).Value = "CNTHRE"
+    
+    Create_Size_Validation
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+    
+End Sub
+
+Sub Load_CARtlEcom_UW()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_CARtlEcom_UW").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_CARtlEcom_UW").Copy
     Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
     Application.CutCopyMode = False
     
@@ -202,6 +235,36 @@ Sub Load_CARtlOut_DS()
     MsgBox ("Data load complete!")
     
 End Sub
+
+Sub Load_CARtlOut_UW()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_CARtlOut_UW").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_CARtlOut_UW").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "Canada Tommy Hilfiger Retail Outlet"
+    ActiveSheet.Cells(1, 3).Value = "CNTHRO"
+    
+    Create_Size_Validation
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+    
+End Sub
+
 
 Sub Load_CAWhs()
 '
@@ -319,6 +382,35 @@ Sub Load_USRtlEcom_DS()
     
 End Sub
 
+Sub Load_USRtlEcom_UW()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_USRtlEcom_UW").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_USRtlEcom_UW").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "US Tommy Hilfiger Retail Ecom"
+    ActiveSheet.Cells(1, 3).Value = "USTHRE"
+    
+    Create_Size_Validation
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+    
+End Sub
+
 Sub Load_USRtlOut()
 '
 ' Load data from named query range into NA Commercialization worksheet
@@ -377,6 +469,34 @@ Sub Load_USRtlOut_DS()
     
 End Sub
 
+Sub Load_USRtlOut_UW()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+    ActiveWorkbook.Connections("Query - Query_NAFlat_USRtlOut_UW").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_USRtlOut_UW").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "US Tommy Hilfiger Retail Outlet"
+    ActiveSheet.Cells(1, 3).Value = "USTHRO"
+    
+    Create_Size_Validation
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+    
+End Sub
 
 Sub Load_USWhs()
 '

@@ -1,0 +1,10 @@
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\esalin\Desktop\NA Commercialization\Product Data Governance Worksheet.xlsm"), null, true),
+    #"Theme (SAP)_Sheet" = Source{[Item="Theme (SAP)",Kind="Sheet"]}[Data],
+    #"Removed Top Rows" = Table.Skip(#"Theme (SAP)_Sheet",1),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Value", type text}, {"Code", type text}, {"Description", type text}, {"Status", type text}, {"Date field", type date}, {"Person", type text}, {"Comment/Follow Up", type text}, {"Centric", type text}, {"SAP", type text}, {"MDM", type text}, {"XPC", type text}, {"JDA", type text}, {"ACS", type text}, {"Wholsale", type text}, {"HS Retail", type text}, {"TH Ret", type text}, {"CK Retail", type text}, {"Speedo", type text}, {"CK Asia", type text}, {"THJ", type text}, {"THC", type text}}),
+    #"Filtered for Active Status" = Table.SelectRows(#"Changed Type", each ([Status] = "Active")),
+    #"Removed Non Value Columns" = Table.RemoveColumns(#"Filtered for Active Status",{"Code", "Description", "Status", "Date field", "Person", "Comment/Follow Up", "Centric", "SAP", "MDM", "XPC", "JDA", "ACS", "Wholsale", "HS Retail", "TH Ret", "CK Retail", "Speedo", "CK Asia", "THJ", "THC"})
+in
+    #"Removed Non Value Columns"

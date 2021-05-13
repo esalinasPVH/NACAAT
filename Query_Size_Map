@@ -8,6 +8,7 @@ let
     #"Added Key" = Table.AddColumn(#"Filtered to Centric NA", "Source Size Key", each [Source Size Range]&[Source Size Range Offered]),
     #"Removed Other Columns" = Table.SelectColumns(#"Added Key",{"Source Size Key", "Adopted Sizes"}),
     #"Sorted Rows" = Table.Sort(#"Removed Other Columns",{{"Source Size Key", Order.Ascending}}),
-    #"Removed Duplicates" = Table.Distinct(#"Sorted Rows")
+    #"Removed Duplicates" = Table.Distinct(#"Sorted Rows"),
+    #"Sorted Sizes" = Table.Sort(#"Removed Duplicates",{{"Source Size Key", Order.Ascending}, {"Adopted Sizes", Order.Ascending}})
 in
-    #"Removed Duplicates"
+    #"Sorted Sizes"

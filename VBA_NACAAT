@@ -85,6 +85,7 @@ Sub Initialize()
     Range("Query_NAFlat_USWhs").ClearContents
     Range("Query_Size_Map").ClearContents
     Range("Query_LOV_Theme").ClearContents
+    Range("Query_LOV_ProdSeg").ClearContents
 
 'Reset to Instructions view
     Sheets("Instructions").Activate
@@ -116,6 +117,7 @@ Sub Load_CARtlEcom()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -147,6 +149,7 @@ Sub Load_CARtlEcom_DS()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -178,6 +181,7 @@ Sub Load_CARtlEcom_UW()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -209,6 +213,7 @@ Sub Load_CARtlOut()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -240,6 +245,7 @@ Sub Load_CARtlOut_DS()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -271,6 +277,7 @@ Sub Load_CARtlOut_UW()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -303,6 +310,7 @@ Sub Load_CAWhs()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -334,6 +342,7 @@ Sub Load_IM()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -365,6 +374,7 @@ Sub Load_USRtlEcom()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -396,6 +406,7 @@ Sub Load_USRtlEcom_DS()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -427,6 +438,7 @@ Sub Load_USRtlEcom_UW()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -458,6 +470,7 @@ Sub Load_USRtlOut()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -489,6 +502,7 @@ Sub Load_USRtlOut_DS()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -520,6 +534,7 @@ Sub Load_USRtlOut_UW()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -551,6 +566,7 @@ Sub Load_USWhs()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -582,6 +598,7 @@ Sub Load_HKTHRT()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -613,6 +630,7 @@ Sub Load_JPTHRT()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -644,6 +662,7 @@ Sub Load_JPTHWH()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -675,6 +694,7 @@ Sub Load_APTHWH()
 ' Validations
     Create_Size_Validation
     Validate_Theme
+    Validate_ProdSeg
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -759,3 +779,28 @@ Sub Validate_Theme()
     End With
  
 End Sub
+
+Sub Validate_ProdSeg()
+ 
+    'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
+
+    ActiveWorkbook.Connections("Query - Query_LOV_ProdSeg").Refresh
+
+    Dim ws As Worksheet
+    Dim srcRange As Range, dstRange As Range
+    
+    Set srcSheet = ThisWorkbook.Worksheets("Sheet_LOV_ProdSeg")
+    Set srcRange = Range("Query_LOV_ProdSeg")
+    
+    Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
+    Set dstRange = dstSheet.Range("AW3", Range("AW3").End(xlDown)).Offset(, -9)
+    
+    With dstRange.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="='" & srcSheet.name & "'!" & srcRange.Address
+        .InCellDropdown = True
+    End With
+ 
+End Sub
+

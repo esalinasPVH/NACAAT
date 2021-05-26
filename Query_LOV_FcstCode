@@ -1,0 +1,11 @@
+let
+    RelativePath = Excel.CurrentWorkbook(){[Name="RelativePath"]}[Content]{0}[Column1],
+    Source = Excel.Workbook(File.Contents(RelativePath & "Product Data Governance Worksheet.xlsm"), null, true),
+    #"Forecast Code (SAP)_Sheet" = Source{[Item="Forecast Code (SAP)",Kind="Sheet"]}[Data],
+    #"Removed Top Rows" = Table.Skip(#"Forecast Code (SAP)_Sheet",1),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Value", type text}, {"Code", type text}, {"Description", type text}, {"Status", type text}, {"Date field", type date}, {"Person", type text}, {"Comment/Follow Up", type text}, {"Centric", type text}, {"SAP", type text}, {"MDM", type text}, {"XPC", type text}, {"JDA", type text}, {"ACS", type text}, {"Heritage Sportwear", type text}, {"Calvin Klein", type text}, {"Dress Furnishings Group", type text}, {"The Underwear Group", type text}, {"Swim", type text}, {"Tommy Hilfiger", type text}, {"THJ", type text}, {"CK Asia", type text}}),
+    #"Filtered for Active Status" = Table.SelectRows(#"Changed Type", each ([Status] = "Active")),
+    #"Removed Non-Value Columns" = Table.SelectColumns(#"Filtered for Active Status",{"Value"})
+in
+    #"Removed Non-Value Columns"

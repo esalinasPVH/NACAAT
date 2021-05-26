@@ -86,6 +86,8 @@ Sub Initialize()
     Range("Query_Size_Map").ClearContents
     Range("Query_LOV_Theme").ClearContents
     Range("Query_LOV_ProdSeg").ClearContents
+    Range("Query_LOV_FcstCode").ClearContents
+    Range("Query_LOV_PackMthd").ClearContents
     Range("Query_LOV_SampBlk").ClearContents
 
 'Reset to Instructions view
@@ -116,10 +118,7 @@ Sub Load_CARtlEcom()
     ActiveSheet.Cells(1, 3).Value = "CNTHRE"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -149,10 +148,7 @@ Sub Load_CARtlEcom_DS()
     ActiveSheet.Cells(1, 3).Value = "CNTHRE"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -180,12 +176,9 @@ Sub Load_CARtlEcom_UW()
   
     ActiveSheet.Cells(1, 2).Value = "Canada Tommy Hilfiger Retail Ecom"
     ActiveSheet.Cells(1, 3).Value = "CNTHRE"
-    
+
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -215,10 +208,7 @@ Sub Load_CARtlOut()
     ActiveSheet.Cells(1, 3).Value = "CNTHRO"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -248,10 +238,7 @@ Sub Load_CARtlOut_DS()
     ActiveSheet.Cells(1, 3).Value = "CNTHRO"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -281,10 +268,7 @@ Sub Load_CARtlOut_UW()
     ActiveSheet.Cells(1, 3).Value = "CNTHRO"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -315,10 +299,7 @@ Sub Load_CAWhs()
     ActiveSheet.Cells(1, 3).Value = "CNTHWH"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -348,10 +329,7 @@ Sub Load_IM()
     ActiveSheet.Cells(1, 3).Value = "IM"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -381,10 +359,7 @@ Sub Load_USRtlEcom()
     ActiveSheet.Cells(1, 3).Value = "USTHRE"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -414,10 +389,7 @@ Sub Load_USRtlEcom_DS()
     ActiveSheet.Cells(1, 3).Value = "USTHRE"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -447,10 +419,7 @@ Sub Load_USRtlEcom_UW()
     ActiveSheet.Cells(1, 3).Value = "USTHRE"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -480,10 +449,7 @@ Sub Load_USRtlOut()
     ActiveSheet.Cells(1, 3).Value = "USTHRO"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -513,10 +479,7 @@ Sub Load_USRtlOut_DS()
     ActiveSheet.Cells(1, 3).Value = "USTHRO"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -546,10 +509,7 @@ Sub Load_USRtlOut_UW()
     ActiveSheet.Cells(1, 3).Value = "USTHRO"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -579,10 +539,7 @@ Sub Load_USWhs()
     ActiveSheet.Cells(1, 3).Value = "USTHWH"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -612,10 +569,7 @@ Sub Load_HKTHRT()
     ActiveSheet.Cells(1, 3).Value = "HKTHRT"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -645,10 +599,7 @@ Sub Load_JPTHRT()
     ActiveSheet.Cells(1, 3).Value = "JPTHRT"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -678,10 +629,7 @@ Sub Load_JPTHWH()
     ActiveSheet.Cells(1, 3).Value = "JPTHWH"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -711,10 +659,7 @@ Sub Load_APTHWH()
     ActiveSheet.Cells(1, 3).Value = "APTHWH"
     
 ' Validations
-    Create_Size_Validation
-    Validate_Theme
-    Validate_ProdSeg
-    Validate_SampBlk
+    Insert_Validations
     
     ActiveSheet.Cells(3, 1).Select
     
@@ -824,6 +769,54 @@ Sub Validate_ProdSeg()
  
 End Sub
 
+Sub Validate_FcstCode()
+ 
+    'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
+
+    ActiveWorkbook.Connections("Query - Query_LOV_FcstCode").Refresh
+
+    Dim ws As Worksheet
+    Dim srcRange As Range, dstRange As Range
+    
+    Set srcSheet = ThisWorkbook.Worksheets("Sheet_LOV_FcstCode")
+    Set srcRange = Range("Query_LOV_FcstCode")
+    
+    Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
+    Set dstRange = dstSheet.Range("AW3", Range("AW3").End(xlDown)).Offset(, -8)
+    
+    With dstRange.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="='" & srcSheet.name & "'!" & srcRange.Address
+        .InCellDropdown = True
+    End With
+ 
+End Sub
+
+Sub Validate_PackMthd()
+ 
+    'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
+
+    ActiveWorkbook.Connections("Query - Query_LOV_PackMthd").Refresh
+
+    Dim ws As Worksheet
+    Dim srcRange As Range, dstRange As Range
+    
+    Set srcSheet = ThisWorkbook.Worksheets("Sheet_LOV_PackMthd")
+    Set srcRange = Range("Query_LOV_PackMthd")
+    
+    Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
+    Set dstRange = dstSheet.Range("AW3", Range("AW3").End(xlDown)).Offset(, -7)
+    
+    With dstRange.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="='" & srcSheet.name & "'!" & srcRange.Address
+        .InCellDropdown = True
+    End With
+ 
+End Sub
+
 Sub Validate_SampBlk()
  
     'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
@@ -848,3 +841,14 @@ Sub Validate_SampBlk()
  
 End Sub
 
+
+Sub Insert_Validations()
+
+    Create_Size_Validation
+    Validate_Theme
+    Validate_ProdSeg
+    Validate_FcstCode
+    Validate_PackMthd
+    Validate_SampBlk
+
+End Sub

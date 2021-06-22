@@ -325,7 +325,7 @@ Sub Load_IM()
     Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
     Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
   
-    ActiveSheet.Cells(1, 2).Value = "US Tommy Hilfiger Wholesale (IM)"
+    ActiveSheet.Cells(1, 2).Value = "US Tommy Hilfiger Retail Outlet (IM)"
     ActiveSheet.Cells(1, 3).Value = "IM"
     
 ' Validations

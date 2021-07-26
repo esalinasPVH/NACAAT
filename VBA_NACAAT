@@ -680,7 +680,7 @@ Sub Create_Size_Validation()
     
     Sheets("NA Commercialization Worksheet").Activate
     Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
-    Set dstRange = dstSheet.Range("AI3", Range("AI3").End(xlDown)).Offset(, 1)
+    Set dstRange = dstSheet.Range("AH3", Range("AH3").End(xlDown)).Offset(, 2)
     
     With dstRange.Validation
         .Delete 'delete previous validation

@@ -84,6 +84,7 @@ Sub Initialize()
     Range("Query_NAFlat_USRtlOut_UW").ClearContents
     Range("Query_NAFlat_USWhs").ClearContents
     Range("Query_Size_Map").ClearContents
+    Range("Query_LOV_ComSeas").ClearContents
     Range("Query_LOV_Theme").ClearContents
     Range("Query_LOV_ProdSeg").ClearContents
     Range("Query_LOV_FcstCode").ClearContents
@@ -721,6 +722,30 @@ Sub Create_SourceSizeKey_Name()
  
 End Sub
 
+Sub Validate_ComSeas()
+ 
+    'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
+
+    ActiveWorkbook.Connections("Query - Query_LOV_ComSeas").Refresh
+
+    Dim ws As Worksheet
+    Dim srcRange As Range, dstRange As Range
+    
+    Set srcSheet = ThisWorkbook.Worksheets("Sheet_LOV_ComSeas")
+    Set srcRange = Range("Query_LOV_ComSeas")
+    
+    Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
+    Set dstRange = dstSheet.Range("AW3", Range("AW3").End(xlDown)).Offset(, -11)
+    
+    With dstRange.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="='" & srcSheet.name & "'!" & srcRange.Address
+        .InCellDropdown = True
+    End With
+ 
+End Sub
+
 Sub Validate_Theme()
  
     'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
@@ -842,9 +867,12 @@ Sub Validate_SampBlk()
 End Sub
 
 
+
+
 Sub Insert_Validations()
 
     Create_Size_Validation
+    Validate_ComSeas
     Validate_Theme
     Validate_ProdSeg
     Validate_FcstCode

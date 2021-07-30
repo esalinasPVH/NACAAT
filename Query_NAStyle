@@ -17,6 +17,10 @@ let
     #"Removed Commercial Style" = Table.RemoveColumns(#"Added Sample Bulk",{"Commercialized Style Number(*)"}),
     #"Added Commercial Style" = Table.AddColumn(#"Removed Commercial Style", "Commercialized Style Number(*)", each [Legacy Style Number]),
     #"Removed LDP Columns" = Table.RemoveColumns(#"Added Commercial Style",{"LDP", "LDP Currency"}),
-    #"Replaced Core Yr with 9999" = Table.ReplaceValue(#"Removed LDP Columns",each [Commercial Season],each if Text.StartsWith([Commercial Season], "Core") then "Core 9999" else [Commercial Season],Replacer.ReplaceText,{"Commercial Season"})
+    #"Replaced Core Yr with 9999" = Table.ReplaceValue(#"Removed LDP Columns",each [Commercial Season],each if Text.StartsWith([Commercial Season], "Core") then "Core 9999" else [Commercial Season],Replacer.ReplaceText,{"Commercial Season"}),
+    #"Renamed Adopted Sizes" = Table.RenameColumns(#"Replaced Core Yr with 9999",{{"Adopted Sizes(*)", "Adopted Sizes"}}),
+    #"Replaced No Size" = Table.ReplaceValue(#"Renamed Adopted Sizes",each [Adopted Sizes], each if [Size Range Offered] = "No Size" then "No Size" else [Adopted Sizes],Replacer.ReplaceValue,{"Adopted Sizes"}),
+    #"Replaced One Size" = Table.ReplaceValue(#"Replaced No Size",each [Adopted Sizes], each if [Size Range] = "A1D ONE SIZE" then "One Size" else [Adopted Sizes],Replacer.ReplaceValue,{"Adopted Sizes"}),
+    #"Renamed Adopted Sizes(*)" = Table.RenameColumns(#"Replaced One Size",{{"Adopted Sizes", "Adopted Sizes(*)"}})
 in
-    #"Replaced Core Yr with 9999"
+    #"Renamed Adopted Sizes(*)"

@@ -1,6 +1,6 @@
 let
     Source = #"Query_NAFlat",
-    #"Filtered TH" = Table.SelectRows(Source, each ([Business Group] = "Tommy Hilfiger")),
+    #"Filtered TH" = Table.SelectRows(Source, each ([Business Group] = "The Underwear Group" or [Business Group] = "Tommy Hilfiger")),
     #"Removed Collection" = Table.RemoveColumns(#"Filtered TH",{"Collection(*)"}),
     #"Added Default Collection" = Table.AddColumn(#"Removed Collection", "Collection(*)", each "Japan Tommy Hilfiger Wholesale"),
     #"Removed Dlvy Plnt" = Table.RemoveColumns(#"Added Default Collection",{"Delivery Plant"}),

@@ -83,6 +83,15 @@ Sub Initialize()
     Range("Query_NAFlat_USRtlOut_DS").ClearContents
     Range("Query_NAFlat_USRtlOut_UW").ClearContents
     Range("Query_NAFlat_USWhs").ClearContents
+    
+    Range("Query_NAFlat_JPTHRT").ClearContents
+    Range("Query_NAFlat_JPTHWH").ClearContents
+    Range("Query_NAFlat_HKTHRT").ClearContents
+    Range("Query_NAFlat_APTHWH").ClearContents
+    
+    Range("Query_NA_Export").ClearContents
+    
+    
     Range("Query_Size_Map").ClearContents
     Range("Query_LOV_ComSeas").ClearContents
     Range("Query_LOV_Theme").ClearContents

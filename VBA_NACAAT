@@ -60,9 +60,11 @@ Sub Initialize()
 ' Initialize NACAAT
 '
 
+On Error GoTo exception
 ' NA Commercialization Worksheet
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     ActiveSheet.Cells(1, 2).Value = ""
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetHidden
@@ -102,7 +104,11 @@ Sub Initialize()
 
 'Reset to Instructions view
     Sheets("Instructions").Activate
-    MsgBox ("Initialization complete!")
+    MsgBox ("NACAAT has been reset!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
     
 End Sub
 
@@ -110,11 +116,15 @@ Sub Load_CARtlEcom()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+    
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_CARtlEcom").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
+    
     
     Range("Query_NAFlat_CARtlEcom").Copy
     Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
@@ -133,6 +143,11 @@ Sub Load_CARtlEcom()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -140,10 +155,12 @@ Sub Load_CARtlEcom_DS()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_CARtlEcom_DS").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_CARtlEcom_DS").Copy
@@ -163,6 +180,11 @@ Sub Load_CARtlEcom_DS()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -170,10 +192,12 @@ Sub Load_CARtlEcom_UW()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_CARtlEcom_UW").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_CARtlEcom_UW").Copy
@@ -193,6 +217,11 @@ Sub Load_CARtlEcom_UW()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -200,10 +229,12 @@ Sub Load_CARtlOut()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_CARtlOut").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_CARtlOut").Copy
@@ -223,6 +254,11 @@ Sub Load_CARtlOut()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -230,10 +266,12 @@ Sub Load_CARtlOut_DS()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_CARtlOut_DS").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_CARtlOut_DS").Copy
@@ -253,6 +291,11 @@ Sub Load_CARtlOut_DS()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -260,10 +303,12 @@ Sub Load_CARtlOut_UW()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_CARtlOut_UW").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_CARtlOut_UW").Copy
@@ -283,6 +328,11 @@ Sub Load_CARtlOut_UW()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -291,10 +341,12 @@ Sub Load_CAWhs()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_CAWhs").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_CAWhs").Copy
@@ -314,6 +366,11 @@ Sub Load_CAWhs()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -321,10 +378,12 @@ Sub Load_IM()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_IM").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_IM").Copy
@@ -344,6 +403,11 @@ Sub Load_IM()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -351,10 +415,12 @@ Sub Load_USRtlEcom()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_USRtlEcom").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_USRtlEcom").Copy
@@ -374,6 +440,11 @@ Sub Load_USRtlEcom()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -381,10 +452,12 @@ Sub Load_USRtlEcom_DS()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_USRtlEcom_DS").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_USRtlEcom_DS").Copy
@@ -404,6 +477,11 @@ Sub Load_USRtlEcom_DS()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -411,10 +489,12 @@ Sub Load_USRtlEcom_UW()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_USRtlEcom_UW").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_USRtlEcom_UW").Copy
@@ -434,6 +514,11 @@ Sub Load_USRtlEcom_UW()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -441,10 +526,12 @@ Sub Load_USRtlOut()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_USRtlOut").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_USRtlOut").Copy
@@ -464,6 +551,11 @@ Sub Load_USRtlOut()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -471,10 +563,12 @@ Sub Load_USRtlOut_DS()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_USRtlOut_DS").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_USRtlOut_DS").Copy
@@ -494,6 +588,11 @@ Sub Load_USRtlOut_DS()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -501,10 +600,12 @@ Sub Load_USRtlOut_UW()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_USRtlOut_UW").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_USRtlOut_UW").Copy
@@ -524,6 +625,11 @@ Sub Load_USRtlOut_UW()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -531,10 +637,12 @@ Sub Load_USWhs()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_USWhs").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_USWhs").Copy
@@ -554,6 +662,11 @@ Sub Load_USWhs()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -561,10 +674,12 @@ Sub Load_HKTHRT()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_HKTHRT").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_HKTHRT").Copy
@@ -584,6 +699,11 @@ Sub Load_HKTHRT()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -591,10 +711,12 @@ Sub Load_JPTHRT()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_JPTHRT").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_JPTHRT").Copy
@@ -614,6 +736,11 @@ Sub Load_JPTHRT()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -621,10 +748,12 @@ Sub Load_JPTHWH()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_JPTHWH").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_JPTHWH").Copy
@@ -644,6 +773,11 @@ Sub Load_JPTHWH()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -651,10 +785,12 @@ Sub Load_APTHWH()
 '
 ' Load data from named query range into NA Commercialization worksheet
 '
+On Error GoTo exception
     ActiveWorkbook.Connections("Query - Query_NAFlat_APTHWH").Refresh
     
     Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
     Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
     Rows("3:" & Rows.Count).ClearContents
     
     Range("Query_NAFlat_APTHWH").Copy
@@ -674,6 +810,11 @@ Sub Load_APTHWH()
     ActiveSheet.Cells(3, 1).Select
     
     MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
     
 End Sub
 
@@ -875,9 +1016,6 @@ Sub Validate_SampBlk()
  
 End Sub
 
-
-
-
 Sub Insert_Validations()
 
     Create_Size_Validation
@@ -888,4 +1026,15 @@ Sub Insert_Validations()
     Validate_PackMthd
     Validate_SampBlk
 
+End Sub
+
+Sub Clear_All_Filters_Range()
+
+  'To Clear All Fitlers use the ShowAllData method for
+  'for the sheet.  Add error handling to bypass error if
+  'no filters are applied.  Does not work for Tables.
+  On Error Resume Next
+    Sheets("NA Commercialization Worksheet").ShowAllData
+  On Error GoTo 0
+  
 End Sub

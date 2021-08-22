@@ -1,0 +1,11 @@
+let
+    RelativePath = Excel.CurrentWorkbook(){[Name="RelativePath"]}[Content]{0}[Column1],
+    Source = Excel.Workbook(File.Contents(RelativePath & "Product Data Governance Worksheet.xlsm"), null, true),
+    #"Dlvy Plnt Sheet" = Source{[Item="Delivery Plant",Kind="Sheet"]}[Data],
+    #"Removed Top Rows" = Table.Skip(#"Dlvy Plnt Sheet",1),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+    #"Filtered for Active Status" = Table.SelectRows(#"Promoted Headers", each ([Status] = "Active")),
+    #"Removed Other Columns" = Table.SelectColumns(#"Filtered for Active Status",{"Value"}),
+    #"Sorted Rows" = Table.Sort(#"Removed Other Columns",{{"Value", Order.Ascending}})
+in
+    #"Sorted Rows"

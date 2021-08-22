@@ -93,18 +93,20 @@ On Error GoTo exception
     
     Range("Query_NA_Export").ClearContents
     
-    
     Range("Query_Size_Map").ClearContents
+    Range("Query_LOV_Collection").ClearContents
     Range("Query_LOV_ComSeas").ClearContents
     Range("Query_LOV_Theme").ClearContents
     Range("Query_LOV_ProdSeg").ClearContents
     Range("Query_LOV_FcstCode").ClearContents
     Range("Query_LOV_PackMthd").ClearContents
+    Range("Query_LOV_DlvyPlnt").ClearContents
+    Range("Query_LOV_Currency").ClearContents
     Range("Query_LOV_SampBlk").ClearContents
 
 'Reset to Instructions view
     Sheets("Instructions").Activate
-    MsgBox ("NACAAT has been reset!")
+    MsgBox ("NACAAT has been reset.")
 Done:
     Exit Sub
 exception:
@@ -872,6 +874,30 @@ Sub Create_SourceSizeKey_Name()
  
 End Sub
 
+Sub Validate_Collection()
+ 
+    'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
+
+    ActiveWorkbook.Connections("Query - Query_LOV_Collection").Refresh
+
+    Dim ws As Worksheet
+    Dim srcRange As Range, dstRange As Range
+    
+    Set srcSheet = ThisWorkbook.Worksheets("Sheet_LOV_Collection")
+    Set srcRange = Range("Query_LOV_Collection")
+    
+    Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
+    Set dstRange = dstSheet.Range("AW3", Range("AW3").End(xlDown)).Offset(, -12)
+    
+    With dstRange.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="='" & srcSheet.name & "'!" & srcRange.Address
+        .InCellDropdown = True
+    End With
+ 
+End Sub
+
 Sub Validate_ComSeas()
  
     'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
@@ -992,6 +1018,64 @@ Sub Validate_PackMthd()
  
 End Sub
 
+Sub Validate_DlvyPlnt()
+ 
+    'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
+
+    ActiveWorkbook.Connections("Query - Query_LOV_DlvyPlnt").Refresh
+
+    Dim ws As Worksheet
+    Dim srcRange As Range, dstRange As Range
+    
+    Set srcSheet = ThisWorkbook.Worksheets("Sheet_LOV_DlvyPlnt")
+    Set srcRange = Range("Query_LOV_DlvyPlnt")
+    
+    Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
+    Set dstRange = dstSheet.Range("AW3", Range("AW3").End(xlDown)).Offset(, -6)
+    
+    With dstRange.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="='" & srcSheet.name & "'!" & srcRange.Address
+        .InCellDropdown = True
+    End With
+ 
+End Sub
+
+Sub Validate_Currency()
+ 
+    'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
+
+    ActiveWorkbook.Connections("Query - Query_LOV_Currency").Refresh
+
+    Dim ws As Worksheet
+    Dim srcRange As Range, dstRange As Range
+    
+    Set srcSheet = ThisWorkbook.Worksheets("Sheet_LOV_Currency")
+    Set srcRange = Range("Query_LOV_Currency")
+    
+    Set dstSheet = ThisWorkbook.Worksheets("NA Commercialization Worksheet")
+    
+    Set dstRange_W = dstSheet.Range("AW3", Range("AW3").End(xlDown)).Offset(, -4)
+    
+    With dstRange_W.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="='" & srcSheet.name & "'!" & srcRange.Address
+        .InCellDropdown = True
+    End With
+ 
+    Set dstRange_R = dstSheet.Range("AW3", Range("AW3").End(xlDown)).Offset(, -2)
+    
+    With dstRange_R.Validation
+        .Delete 'delete previous validation
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, _
+        Formula1:="='" & srcSheet.name & "'!" & srcRange.Address
+        .InCellDropdown = True
+    End With
+ 
+End Sub
+
 Sub Validate_SampBlk()
  
     'Source: https://stackoverflow.com/questions/22956604/how-to-add-data-validation-to-a-cell-using-vba
@@ -1019,11 +1103,14 @@ End Sub
 Sub Insert_Validations()
 
     Create_Size_Validation
+    Validate_Collection
     Validate_ComSeas
     Validate_Theme
     Validate_ProdSeg
     Validate_FcstCode
     Validate_PackMthd
+    Validate_DlvyPlnt
+    Validate_Currency
     Validate_SampBlk
 
 End Sub

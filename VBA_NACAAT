@@ -91,6 +91,8 @@ On Error GoTo exception
     Range("Query_NAFlat_HKTHRT").ClearContents
     Range("Query_NAFlat_APTHWH").ClearContents
     
+    Range("Query_NAFlat_Universal").ClearContents
+    
     Range("Query_NA_Export").ClearContents
     
     Range("Query_Size_Map").ClearContents
@@ -805,6 +807,43 @@ On Error GoTo exception
   
     ActiveSheet.Cells(1, 2).Value = "Asia Pacific Tommy Hilfiger Wholesale"
     ActiveSheet.Cells(1, 3).Value = "APTHWH"
+    
+' Validations
+    Insert_Validations
+    
+    ActiveSheet.Cells(3, 1).Select
+    
+    MsgBox ("Data load complete!")
+Done:
+    Exit Sub
+exception:
+    MsgBox Err.Description
+    Initialize
+    
+End Sub
+
+Sub Load_Universal()
+'
+' Load data from named query range into NA Commercialization worksheet
+'
+On Error GoTo exception
+    ActiveWorkbook.Connections("Query - Query_NAFlat_Universal").Refresh
+    
+    Worksheets("NA Commercialization Worksheet").Visible = xlSheetVisible
+    Sheets("NA Commercialization Worksheet").Activate
+    Clear_All_Filters_Range
+    Rows("3:" & Rows.Count).ClearContents
+    
+    Range("Query_NAFlat_Universal").Copy
+    Sheets("NA Commercialization Worksheet").Cells(3, 2).PasteSpecial Paste:=xlPasteValues
+    Application.CutCopyMode = False
+    
+    Sheets("NA Commercialization Worksheet").Cells.EntireRow.AutoFit
+    Sheets("NA Commercialization Worksheet").Columns("A").ColumnWidth = 10.57
+    Sheets("NA Commercialization Worksheet").Rows("1").RowHeight = 23.25
+  
+    ActiveSheet.Cells(1, 2).Value = "Universal"
+    ActiveSheet.Cells(1, 3).Value = "Universal"
     
 ' Validations
     Insert_Validations

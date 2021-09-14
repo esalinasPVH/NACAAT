@@ -15,6 +15,7 @@ let
     #"Filtered DTS Channel" = Table.SelectRows(#"Changed DTS Channel Type", each ([DTS Channel] = "Off Price" or [DTS Channel] = "Wholesale")),
     #"Split DTS Selling Countries" = Table.ExpandListColumn(Table.TransformColumns(#"Filtered DTS Channel", {{"DTS Selling Countries", Splitter.SplitTextByDelimiter(";", QuoteStyle.Csv), let itemType = (type nullable text) meta [Serialized.Text = true] in type {itemType}}}), "DTS Selling Countries"),
     #"Changed DTS Selling Countries Type" = Table.TransformColumnTypes(#"Split DTS Selling Countries",{{"DTS Selling Countries", type text}}),
-    #"Filtered DTS Selling Countries" = Table.SelectRows(#"Changed DTS Selling Countries Type", each ([DTS Selling Countries] = null or [DTS Selling Countries] = "United States of America"))
+    #"Filtered DTS Selling Countries" = Table.SelectRows(#"Changed DTS Selling Countries Type", each ([DTS Selling Countries] = null or [DTS Selling Countries] = "United States of America")),
+    #"Blank Sample Bulk" = Table.ReplaceValue(#"Filtered DTS Selling Countries","B","",Replacer.ReplaceText,{"Sample/Bulk Indicator"})
 in
-    #"Filtered DTS Selling Countries"
+    #"Blank Sample Bulk"
